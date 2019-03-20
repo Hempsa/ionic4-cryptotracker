@@ -1,0 +1,1 @@
+https://rapidapi.com/CoinATMRadar/api/bitcoin-atms

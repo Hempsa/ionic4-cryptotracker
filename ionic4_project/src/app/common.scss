@@ -1,0 +1,27 @@
+$colors: (
+    primary:    #488aff,
+    secondary:  #32db64,
+    danger:     #f53d3d,
+    light:      #f4f4f4,
+    dark:       #222
+);
+
+.toolbar-title-md {
+    padding: 0 12px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #dedede;
+}
+
+.bg {
+    --ion-background-color: #515151;
+}
+
+.ios, .md {
+    .scroll-content {
+        --ion-background-color: map-get($colors, dark);
+    }
+    ion-card-header {
+        font-weight: bold;
+    }
+}
