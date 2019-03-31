@@ -4,16 +4,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'coins',
     pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
   },
   {
     path: 'coins',
     loadChildren: './coins/coins.module#CoinsPageModule'
+  },
+  { 
+    path: 'favourites',
+    loadChildren: './favourites/favourites.module#FavouritesPageModule'
   },
   {
     path: 'portfolio',
@@ -23,7 +23,6 @@ const routes: Routes = [
     path: 'about',
     loadChildren: './about/about.module#AboutPageModule'
   }
-
 ];
 
 @NgModule({
