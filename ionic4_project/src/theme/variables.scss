@@ -1,7 +1,27 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
-/** Ionic CSS Variables **/
+/** Ionic CSS Variables 
+Rally theme colors
+Container Surface Color Opacity #3C3C46 100%
+
+Table text On Surface Color Opacity #FFFFFF 100% 
+
+Header text On Surface Color Opacity #FFFFFF 60%
+
+Divider On Surface Color Opacity #FFFFFF 12%
+https://material.io/design/components/data-tables.html#theming
+
+Roboto Condensed
+Montserrat (Headers)
+
+Värit:
+Rally Green primary #1EB980
+Rally dark green #045D56
+Rally Orange #FF6859
+Rally Yellow #FFCF44
+Rally Purple #B15DFF
+Rally Blue #72DEFF**/
 :root {
   /** primary **/
   --ion-color-primary: #3880ff;
