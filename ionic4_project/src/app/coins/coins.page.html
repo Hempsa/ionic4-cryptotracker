@@ -15,7 +15,7 @@
 
   <div *ngFor="let coin of coins">
     <!-- Repeat this element for each coin -->
-    <ion-card>
+    <ion-card (click)=showPopover(coin)>
       <ion-item>
         <ion-avatar item-start>
           <img src="/assets/img/{{coin.symbol}}@2X.PNG" alt="{{coin.id}}" style="border-radius:0;">

@@ -1,3 +1,28 @@
 <ion-content class="bg">
 
+    <div *ngFor="let coin of visibleCoins">
+        <!-- Repeat this element for each coin -->
+        <ion-card>
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="/assets/img/{{coin.symbol}}@2X.PNG" alt="{{coin.id}}" style="border-radius:0;">
+                </ion-avatar>
+                <h2>{{coin.name}}</h2>
+                <p>{{coin.symbol}}</p>
+            </ion-item>
+            <ion-item actions>
+                <span ion-text item-start>{{coin.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
+                <span ion-text item-start color="subtle"
+                    [ngClass]="(coin.percent_change_1h > 0) ? 'positive' : 'negative'">({{coin.percent_change_1h}}%
+                    1h)</span>
+                <span ion-text item-start color="subtle"
+                    [ngClass]="(coin.percent_change_24h > 0) ? 'positive' : 'negative'">({{coin.percent_change_24h}}%
+                    24h)</span>
+                <button ion-button clear item-end icon-start>
+                    Rank {{coin.rank}}
+                </button>
+            </ion-item>
+        </ion-card>
+    </div>
+
 </ion-content>
