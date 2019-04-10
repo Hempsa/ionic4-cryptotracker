@@ -3,21 +3,31 @@ import { Coin } from '../coin';
 import { StorageService } from '../storage.service';
 import { PortfolioObject } from '../portfolio-object';
 import { PopoverController, NavParams } from '@ionic/angular';
-import { ArrayType } from '@angular/compiler';
+
 
 @Component({
-  selector: 'app-coins-popover',
-  templateUrl: './coins-popover.component.html',
-  styleUrls: ['./coins-popover.component.scss'],
+  selector: 'app-coinmanagement-popover',
+  templateUrl: './coinmanagement-popover.component.html',
+  styleUrls: ['./coinmanagement-popover.component.scss'],
 })
-export class CoinsPopoverComponent {
+export class CoinmanagementPopoverComponent {
 
-  coin: Coin;
+
+  source: string;
+  title: string;
+
+  coin: Coin; // Coin object, set from coins and favourite page
+  portfolioObject: PortfolioObject; // PortfolioObject, set only from portfolio page
+
   favourites: string[] = [] /* declare favourites as array, only cached for convenience */
   portfolio: PortfolioObject[] = [];
 
+
   constructor(private navParams: NavParams, private popoverController: PopoverController, private storageService: StorageService) {
-    this.coin = navParams.get('data');
+    this.source = navParams.get('source');
+    this.coin = navParams.get('coin');
+    this.portfolioObject = navParams.get('portfolioObject');
+    this.updateTitle();
     // Load favorites
     this.storageService.get('favourites').then(data => {
       if (data != null) {
@@ -30,6 +40,21 @@ export class CoinsPopoverComponent {
         this.portfolio = data;
       }
     });
+  }
+
+  updateTitle() {
+    if (this.coin != null) {
+      this.title = this.coin.name;
+    } else if (this.portfolioObject != null) {
+      this.title = this.portfolioObject.name;
+    }
+  }
+
+  /**
+   * Return whether favourite items should be included in popover menu
+   */
+  displayFavouritesItems(): boolean {
+    return this.source == 'page.coins' || this.source == 'page.favourites';
   }
 
   /**
@@ -58,12 +83,19 @@ export class CoinsPopoverComponent {
   removeFromFavourites() {
     var tmpArr: string[] = [];
     this.favourites.forEach(id => {
-      if (id != this.coin.id) {
+      if (this.coin != null && this.coin.id != id) {
         tmpArr.push(id);
       }
     });
     this.storageService.put('favourites', tmpArr);
     this.dismiss();
+  }
+
+  /**
+   * Return whether favourite items should be included in popover menu
+   */
+  displayPortfolioItems(): boolean {
+    return this.source == 'page.coins' || this.source == 'page.portfolio';
   }
 
   /**
@@ -75,7 +107,7 @@ export class CoinsPopoverComponent {
       return false;
     }
     this.portfolio.forEach(coin => {
-      if (this.coin.id == coin.id) {
+      if ((this.coin != null && this.coin.id == coin.id) || this.portfolioObject != null && this.portfolioObject.id == coin.id) {
         contains = true;
       }
     });
@@ -103,7 +135,7 @@ export class CoinsPopoverComponent {
   removeFromPortfolio() {
     var tmpArr: PortfolioObject[] = [];
     this.portfolio.forEach(portfolioObj => {
-      if (this.coin.id != portfolioObj.id) {
+      if ((this.coin != null && this.coin.id != portfolioObj.id) || this.portfolioObject != null && this.portfolioObject.id != portfolioObj.id) {
         tmpArr.push(portfolioObj);
       }
     });
@@ -114,5 +146,6 @@ export class CoinsPopoverComponent {
   dismiss() {
     this.popoverController.dismiss();
   }
+
 
 }

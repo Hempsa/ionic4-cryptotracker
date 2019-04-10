@@ -4,8 +4,8 @@ import { Chart } from 'chart.js'; // Import charts.js
 import { Coin } from '../coin';
 import { Global } from '../global';
 import { PopoverController } from '@ionic/angular';
-import { CoinsPopoverComponent } from '../coins-popover/coins-popover.component'
 import { JsonPipe } from '@angular/common';
+import { CoinmanagementPopoverComponent } from '../coinmanagement-popover/coinmanagement-popover.component';
 
 @Component({
   selector: 'app-coins',
@@ -37,9 +37,10 @@ export class CoinsPage {
    */
   async showPopover(coin: Coin) {
     const popoverElement = await this.popoverController.create({
-      component: CoinsPopoverComponent,
+      component: CoinmanagementPopoverComponent,
       componentProps: {
-        data: coin
+        source: 'page.coins',
+        coin: coin
       }
     });
     return await popoverElement.present();

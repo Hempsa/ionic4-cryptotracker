@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { Coin } from '../coin';
 import { ApiService } from '../api.service';
+import { PopoverController } from '@ionic/angular';
+import { CoinmanagementPopoverComponent } from '../coinmanagement-popover/coinmanagement-popover.component';
 
 @Component({
   selector: 'app-favourites',
@@ -14,10 +16,24 @@ export class FavouritesPage {
   allCoins: Coin[];
   visibleCoins: Coin[] = [];
 
-  constructor(private storageService: StorageService, private apiService: ApiService) {
+  constructor(private popoverController: PopoverController, private storageService: StorageService, private apiService: ApiService) {
     this.apiService.getCoins().subscribe(data => {
       this.allCoins = data;
     });
+  }
+
+  async showPopover(coin: Coin) {
+    const popoverElement = await this.popoverController.create({
+      component: CoinmanagementPopoverComponent,
+      componentProps: {
+        source: 'page.favourites',
+        coin: coin
+      }
+    });
+    popoverElement.onWillDismiss().then(() => {
+      this.ionViewDidEnter();
+    });
+    return await popoverElement.present();
   }
 
   ionViewDidEnter() {
@@ -29,8 +45,8 @@ export class FavouritesPage {
 
   updateFavourites() {
     this.visibleCoins = [];
-    if (this.favourites == null) {
-      return; // No favourites
+    if (this.favourites == null || this.allCoins == null) {
+      return; // Missing data
     }
     this.allCoins.forEach(coin => {
       if (this.favourites.indexOf(coin.id) > -1) {

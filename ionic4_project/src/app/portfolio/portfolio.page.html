@@ -1,8 +1,7 @@
 <ion-content color="dark">
-
     <div *ngFor="let portfolioObject of portfolio">
         <!-- Repeat this element for each coin -->
-        <ion-card>
+        <ion-card (click)=showPopover(portfolioObject)>
             <ion-item color="dark">
                 <ion-avatar item-start>
                     <img src="/assets/img/{{portfolioObject.symbol}}@2X.PNG" alt="{{portfolioObject.id}}"
@@ -12,7 +11,9 @@
                 <p class="cardcurnameport">{{portfolioObject.symbol}}</p>
             </ion-item>
             <ion-item color="dark" actions>
-                <span ion-text item-start class="cardtxtport">Added on: {{portfolioObject.timestamp}}</span>
+                <span ion-text item-start class="cardtxtport">
+                    Added on: {{getReadableTime(portfolioObject.timestamp)}}
+                </span>
                 <span ion-text item-start class="cardtxtport">Price when added:
                     {{portfolioObject.price_usd_when_added | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
                 <span ion-text item-start class="cardtxtport">Price now:
@@ -22,5 +23,4 @@
             </ion-item>
         </ion-card>
     </div>
-
 </ion-content>

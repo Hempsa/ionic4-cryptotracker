@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoinsPopoverComponent } from './coins-popover.component';
+import { CoinmanagementPopoverComponent } from './coinmanagement-popover.component';
 
-describe('CoinsPopoverComponent', () => {
-  let component: CoinsPopoverComponent;
-  let fixture: ComponentFixture<CoinsPopoverComponent>;
+describe('CoinmanagementPopoverComponent', () => {
+  let component: CoinmanagementPopoverComponent;
+  let fixture: ComponentFixture<CoinmanagementPopoverComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoinsPopoverComponent ],
+      declarations: [ CoinmanagementPopoverComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoinsPopoverComponent);
+    fixture = TestBed.createComponent(CoinmanagementPopoverComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

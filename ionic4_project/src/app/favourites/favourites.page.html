@@ -1,53 +1,30 @@
 <ion-content color="dark">
-
-    <div *ngFor="let coin of visibleCoins">
-        <!-- Repeat this element for each coin -->
-        <ion-item color="dark" class="cardclass">
-            <div class="cardtxt">  
-              <ion-button color="medium" size="small" clear item-end icon-start>
-                    {{coin.rank}}
-                </ion-button>
-            </div>
-            <div class="cardtxt">
-              <ion-avatar item-start>
-                <img src="/assets/img/{{coin.symbol}}@2X.PNG" alt="{{coin.id}}" style="border-radius:0;">
-              </ion-avatar>
-            </div>
-            <div class="cardtxt">
-              <p class="cardcurname">{{coin.name}}</p>
-              <p class="cardcurname">{{coin.symbol}}</p>
-            </div>
-            <div class="cardtxtprice">
-              <span ion-text item-start>{{coin.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
-            </div>  
-            <div class="cardhourly">
-              <p class="cardhourlypos" ion-text item-start color="subtle"
-                [ngClass]="(coin.percent_change_1h > 0) ? 'positive' : 'negative'">({{coin.percent_change_1h}}% 1h)</p>
-              <p class="cardhourlypos" ion-text item-start color="subtle"
-                [ngClass]="(coin.percent_change_24h > 0) ? 'positive' : 'negative'">({{coin.percent_change_24h}}% 24h)</p>
-            </div>        
-          </ion-item>
-        <!-- <ion-card>
-            <ion-item>
-                <ion-avatar item-start>
-                    <img src="/assets/img/{{coin.symbol}}@2X.PNG" alt="{{coin.id}}" style="border-radius:0;">
-                </ion-avatar>
-                <h2>{{coin.name}}</h2>
-                <p>{{coin.symbol}}</p>
-            </ion-item>
-            <ion-item actions>
-                <span ion-text item-start>{{coin.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
-                <span ion-text item-start color="subtle"
-                    [ngClass]="(coin.percent_change_1h > 0) ? 'positive' : 'negative'">({{coin.percent_change_1h}}%
-                    1h)</span>
-                <span ion-text item-start color="subtle"
-                    [ngClass]="(coin.percent_change_24h > 0) ? 'positive' : 'negative'">({{coin.percent_change_24h}}%
-                    24h)</span>
-                <button ion-button clear item-end icon-start>
-                    Rank {{coin.rank}}
-                </button>
-            </ion-item>
-        </ion-card>-->
-    </div> 
-  
+  <div *ngFor="let coin of visibleCoins">
+    <!-- Repeat this element for each coin -->
+    <ion-item color="dark" class="cardclass" (click)=showPopover(coin)>
+      <div class="cardtxt">
+        <ion-button color="medium" size="small" clear item-end icon-start>
+          {{coin.rank}}
+        </ion-button>
+      </div>
+      <div class="cardtxt">
+        <ion-avatar item-start>
+          <img src="/assets/img/{{coin.symbol}}@2X.PNG" alt="{{coin.id}}" style="border-radius:0;">
+        </ion-avatar>
+      </div>
+      <div class="cardtxt">
+        <p class="cardcurname">{{coin.name}}</p>
+        <p class="cardcurname">{{coin.symbol}}</p>
+      </div>
+      <div class="cardtxtprice">
+        <span ion-text item-start>{{coin.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
+      </div>
+      <div class="cardhourly">
+        <p class="cardhourlypos" ion-text item-start color="subtle"
+          [ngClass]="(coin.percent_change_1h > 0) ? 'positive' : 'negative'">({{coin.percent_change_1h}}% 1h)</p>
+        <p class="cardhourlypos" ion-text item-start color="subtle"
+          [ngClass]="(coin.percent_change_24h > 0) ? 'positive' : 'negative'">({{coin.percent_change_24h}}% 24h)</p>
+      </div>
+    </ion-item>
+  </div>
 </ion-content>

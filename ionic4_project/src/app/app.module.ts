@@ -7,13 +7,13 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpModule } from '@angular/http'; 
+import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
-import { CoinsPopoverComponent } from './coins-popover/coins-popover.component';
+import { CoinmanagementPopoverComponent } from './coinmanagement-popover/coinmanagement-popover.component';
 
 @NgModule({
-  declarations: [AppComponent, CoinsPopoverComponent],
-  entryComponents: [CoinsPopoverComponent],
+  declarations: [AppComponent, CoinmanagementPopoverComponent],
+  entryComponents: [CoinmanagementPopoverComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -28,4 +28,4 @@ import { CoinsPopoverComponent } from './coins-popover/coins-popover.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

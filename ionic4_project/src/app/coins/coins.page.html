@@ -1,7 +1,4 @@
 <ion-content color="dark">
-
- 
-
   <ion-card color="dark">
     <ion-card-header>
       Market share %
@@ -10,41 +7,38 @@
       <canvas #doughnutCanvas></canvas>
       <p>Total market cap {{global?.total_market_cap_usd | currency:'USD':'symbol-narrow':'1.0-2'}}</p>
       <p>Bitcoin dominance {{global?.bitcoin_percentage_of_market_cap}}%</p>
-
       <!-- https://angular.io/guide/pipes -->
-
     </ion-card-content>
   </ion-card>
 
-<div *ngFor="let coin of coins" >
-  <!-- Repeat this element for each coin -->
-  <ion-card (click)=showPopover(coin)>
-
-    <ion-item color="dark" class="cardclass">
-      <div class="cardtxt">  
-        <ion-button color="medium" size="small" clear item-end icon-start>
-              {{coin.rank}}
+  <div *ngFor="let coin of coins">
+    <!-- Repeat this element for each coin -->
+    <ion-card (click)=showPopover(coin)>
+      <ion-item color="dark" class="cardclass">
+        <div class="cardtxt">
+          <ion-button color="medium" size="small" clear item-end icon-start>
+            {{coin.rank}}
           </ion-button>
-      </div>
-      <div class="cardtxt">
-        <ion-avatar item-start>
-          <img src="/assets/img/{{coin.symbol}}@2X.PNG" alt="{{coin.id}}" style="border-radius:0;">
-        </ion-avatar>
-      </div>
-      <div class="cardtxt">
-        <p class="cardcurname">{{coin.name}}</p>
-        <p class="cardcurname">{{coin.symbol}}</p>
-      </div>
-      <div class="cardtxtprice">
-        <span ion-text item-start>{{coin.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
-      </div>  
-      <div class="cardhourly">
-        <p class="cardhourlypos" ion-text item-start color="subtle"
-          [ngClass]="(coin.percent_change_1h > 0) ? 'positive' : 'negative'">({{coin.percent_change_1h}}% 1h)</p>
-        <p class="cardhourlypos" ion-text item-start color="subtle"
-          [ngClass]="(coin.percent_change_24h > 0) ? 'positive' : 'negative'">({{coin.percent_change_24h}}% 24h)</p>
-      </div>        
-    </ion-item>
-  </ion-card>
-</div>
+        </div>
+        <div class="cardtxt">
+          <ion-avatar item-start>
+            <img src="/assets/img/{{coin.symbol}}@2X.PNG" alt="{{coin.id}}" style="border-radius:0;">
+          </ion-avatar>
+        </div>
+        <div class="cardtxt">
+          <p class="cardcurname">{{coin.name}}</p>
+          <p class="cardcurname">{{coin.symbol}}</p>
+        </div>
+        <div class="cardtxtprice">
+          <span ion-text item-start>{{coin.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
+        </div>
+        <div class="cardhourly">
+          <p class="cardhourlypos" ion-text item-start color="subtle"
+            [ngClass]="(coin.percent_change_1h > 0) ? 'positive' : 'negative'">({{coin.percent_change_1h}}% 1h)</p>
+          <p class="cardhourlypos" ion-text item-start color="subtle"
+            [ngClass]="(coin.percent_change_24h > 0) ? 'positive' : 'negative'">({{coin.percent_change_24h}}% 24h)</p>
+        </div>
+      </ion-item>
+    </ion-card>
+  </div>
 </ion-content>
