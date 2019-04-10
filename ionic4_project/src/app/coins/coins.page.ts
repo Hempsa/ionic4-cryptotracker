@@ -40,7 +40,7 @@ export class CoinsPage {
       component: CoinmanagementPopoverComponent,
       componentProps: {
         source: 'page.coins',
-        coin: coin
+        object: coin
       }
     });
     return await popoverElement.present();

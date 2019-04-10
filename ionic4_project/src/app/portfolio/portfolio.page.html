@@ -17,7 +17,7 @@
                 <span ion-text item-start class="cardtxtport">Price when added:
                     {{portfolioObject.price_usd_when_added | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
                 <span ion-text item-start class="cardtxtport">Price now:
-                    {{portfolioObject.price_usd_now | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
+                    {{portfolioObject.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
                 <span ion-text item-start class="cardtxtport" color="subtle"
                     [ngClass]="(portfolioObject.price_increase_percentage >= 0) ? 'positive' : 'negative'">({{portfolioObject.price_increase_percentage}}%)</span>
             </ion-item>

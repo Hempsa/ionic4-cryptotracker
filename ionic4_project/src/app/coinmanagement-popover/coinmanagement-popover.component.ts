@@ -12,22 +12,17 @@ import { PopoverController, NavParams } from '@ionic/angular';
 })
 export class CoinmanagementPopoverComponent {
 
-
   source: string;
-  title: string;
 
-  coin: Coin; // Coin object, set from coins and favourite page
-  portfolioObject: PortfolioObject; // PortfolioObject, set only from portfolio page
+  // coin: Coin; // Coin object, set from coins and favourite page
+  object: PortfolioObject; // PortfolioObject, set only from portfolio page
 
   favourites: string[] = [] /* declare favourites as array, only cached for convenience */
   portfolio: PortfolioObject[] = [];
 
-
   constructor(private navParams: NavParams, private popoverController: PopoverController, private storageService: StorageService) {
     this.source = navParams.get('source');
-    this.coin = navParams.get('coin');
-    this.portfolioObject = navParams.get('portfolioObject');
-    this.updateTitle();
+    this.object = navParams.get('object');
     // Load favorites
     this.storageService.get('favourites').then(data => {
       if (data != null) {
@@ -42,13 +37,22 @@ export class CoinmanagementPopoverComponent {
     });
   }
 
-  updateTitle() {
-    if (this.coin != null) {
-      this.title = this.coin.name;
-    } else if (this.portfolioObject != null) {
-      this.title = this.portfolioObject.name;
-    }
-  }
+  /**
+  * Inconvenient way to update values as the way this works is bad
+  */
+  /**
+   updateValues() {
+     if (this.coin != null) {
+       this.id = this.coin.id;
+       this.symbol = this.coin.symbol;
+       this.title = this.coin.name;
+     } else if (this.portfolioObject != null) {
+       this.id = this.portfolioObject.id;
+       this.symbol = this.portfolioObject.symbol;
+       this.title = this.portfolioObject.name;
+     }
+   }
+   */
 
   /**
    * Return whether favourite items should be included in popover menu
@@ -65,14 +69,14 @@ export class CoinmanagementPopoverComponent {
     if (this.favourites == null) {
       return false;
     }
-    return this.favourites.indexOf(this.coin.id) > -1;
+    return this.favourites.indexOf(this.object.id) > -1;
   }
 
   /**
    * Add to favourites
    */
   addToFavourites() {
-    this.favourites.push(this.coin.id);
+    this.favourites.push(this.object.id);
     this.storageService.put('favourites', this.favourites);
     this.dismiss();
   }
@@ -83,7 +87,7 @@ export class CoinmanagementPopoverComponent {
   removeFromFavourites() {
     var tmpArr: string[] = [];
     this.favourites.forEach(id => {
-      if (this.coin != null && this.coin.id != id) {
+      if (this.object != null && this.object.id != id) {
         tmpArr.push(id);
       }
     });
@@ -107,7 +111,7 @@ export class CoinmanagementPopoverComponent {
       return false;
     }
     this.portfolio.forEach(coin => {
-      if ((this.coin != null && this.coin.id == coin.id) || this.portfolioObject != null && this.portfolioObject.id == coin.id) {
+      if (this.object != null && this.object.id == coin.id) {
         contains = true;
       }
     });
@@ -119,11 +123,11 @@ export class CoinmanagementPopoverComponent {
    */
   addToPortfolio() {
     var portfolioObj: PortfolioObject = new PortfolioObject();
-    portfolioObj.id = this.coin.id;
-    portfolioObj.name = this.coin.name;
-    portfolioObj.symbol = this.coin.symbol;
+    portfolioObj.id = this.object.id;
+    portfolioObj.name = this.object.name;
+    portfolioObj.symbol = this.object.symbol;
     portfolioObj.timestamp = Date.now();
-    portfolioObj.price_usd_when_added = this.coin.price_usd;
+    portfolioObj.price_usd_when_added = this.object.price_usd;
     this.portfolio.push(portfolioObj);
     this.storageService.put('portfolio', this.portfolio);
     this.dismiss();
@@ -135,7 +139,7 @@ export class CoinmanagementPopoverComponent {
   removeFromPortfolio() {
     var tmpArr: PortfolioObject[] = [];
     this.portfolio.forEach(portfolioObj => {
-      if ((this.coin != null && this.coin.id != portfolioObj.id) || this.portfolioObject != null && this.portfolioObject.id != portfolioObj.id) {
+      if (this.object != null && this.object.id != portfolioObj.id) {
         tmpArr.push(portfolioObj);
       }
     });

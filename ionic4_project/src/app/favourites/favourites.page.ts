@@ -27,7 +27,7 @@ export class FavouritesPage {
       component: CoinmanagementPopoverComponent,
       componentProps: {
         source: 'page.favourites',
-        coin: coin
+        object: coin
       }
     });
     popoverElement.onWillDismiss().then(() => {

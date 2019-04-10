@@ -27,7 +27,7 @@ export class PortfolioPage {
       component: CoinmanagementPopoverComponent,
       componentProps: {
         source: 'page.portfolio',
-        portfolioObject: portfolioObject
+        object: portfolioObject
       }
     });
     popoverElement.onWillDismiss().then(() => {
@@ -43,8 +43,8 @@ export class PortfolioPage {
         var coin = this.getCoin(portfolioObject.id);
         if (coin != null) {
           // Update object
-          portfolioObject.price_usd_now = coin.price_usd;
-          var increase = (portfolioObject.price_usd_now / portfolioObject.price_usd_when_added) * 100;
+          portfolioObject.price_usd = coin.price_usd;
+          var increase = (portfolioObject.price_usd / portfolioObject.price_usd_when_added) * 100;
           portfolioObject.price_increase_percentage = increase.toFixed(2);
         }
       });
