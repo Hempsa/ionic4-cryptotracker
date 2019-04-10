@@ -149,3 +149,19 @@ ion-avatar  {
     width:32px !important;
     height : 32px !important;
     }
+
+.negative {
+    --background: #E34C3C;
+    --background: -webkit-linear-gradient(to right, #E34C3C, #BD3F32);
+    --background: linear-gradient(to right, #9c6560, #BD3F32);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #E34C3C;
+}
+
+.positive {
+    --background: #35BD59; // fallback for old browsers
+    --background: -webkit-linear-gradient(to right, #35BD59, #299446); // Chrome 10-25, Safari 5.1-6
+    --background: linear-gradient(to right, #35BD59, #299446); // W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #35BD59;
+}
