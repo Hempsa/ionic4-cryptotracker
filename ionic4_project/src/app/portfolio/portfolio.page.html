@@ -1,24 +1,24 @@
-<ion-content class="bg">
+<ion-content color="dark">
 
     <div *ngFor="let portfolioObject of portfolio">
         <!-- Repeat this element for each coin -->
         <ion-card>
-            <ion-item>
+            <ion-item color="dark">
                 <ion-avatar item-start>
                     <img src="/assets/img/{{portfolioObject.symbol}}@2X.PNG" alt="{{portfolioObject.id}}"
                         style="border-radius:0;">
                 </ion-avatar>
-                <h2>{{portfolioObject.name}}</h2>
-                <p>{{portfolioObject.symbol}}</p>
+                <p class="cardcurnameport">{{portfolioObject.name}}</p>
+                <p class="cardcurnameport">{{portfolioObject.symbol}}</p>
             </ion-item>
-            <ion-item actions>
-                <span ion-text item-start>Added on: {{portfolioObject.timestamp}}</span>
-                <span ion-text item-start>Price when added:
+            <ion-item color="dark" actions>
+                <span ion-text item-start class="cardtxtport">Added on: {{portfolioObject.timestamp}}</span>
+                <span ion-text item-start class="cardtxtport">Price when added:
                     {{portfolioObject.price_usd_when_added | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
-                <span ion-text item-start>Price now:
+                <span ion-text item-start class="cardtxtport">Price now:
                     {{portfolioObject.price_usd_now | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
-                <span ion-text item-start color="subtle"
-                    [ngClass]="(portfolioObject.price_increase_percentage >= 100) ? 'positive' : 'negative'">({{portfolioObject.price_increase_percentage}}%)</span>
+                <span ion-text item-start class="cardtxtport" color="subtle"
+                    [ngClass]="(portfolioObject.price_increase_percentage >= 0) ? 'positive' : 'negative'">({{portfolioObject.price_increase_percentage}}%)</span>
             </ion-item>
         </ion-card>
     </div>
