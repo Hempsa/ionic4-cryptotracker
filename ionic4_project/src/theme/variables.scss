@@ -1,31 +1,7 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
-/** Ionic CSS Variables 
-Rally theme colors
-Container Surface Color Opacity #3C3C46 100%
-
-Table text On Surface Color Opacity #FFFFFF 100% 
-
-Header text On Surface Color Opacity #FFFFFF 60%
-
-Divider On Surface Color Opacity #FFFFFF 12%
-https://material.io/design/components/data-tables.html#theming
-
-
-font-family: 'Roboto', sans-serif;
-font-family: 'Roboto Condensed', sans-serif;
-Montserrat (Headers)
-<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Roboto+Condensed" rel="stylesheet">
-font-family: 'Montserrat', sans-serif;
-
-Värit:
-Rally Green primary #1EB980
-Rally dark green #045D56
-Rally Orange #FF6859
-Rally Yellow #FFCF44
-Rally Purple #B15DFF
-Rally Blue #72DEFF**/
+/** Ionic CSS Variables **/
 :root {
   /** primary **/
   --ion-color-primary: #3880ff;
@@ -82,6 +58,7 @@ Rally Blue #72DEFF**/
   --ion-color-dark-contrast-rgb: 255, 255, 255;
   --ion-color-dark-shade: #1e2023;
   --ion-color-dark-tint: #383a3e;
+ 
 
   /** medium **/
   --ion-color-medium: #989aa2;
@@ -106,5 +83,7 @@ Rally Blue #72DEFF**/
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
+
+
 
 }

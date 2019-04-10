@@ -25,3 +25,96 @@ $colors: (
         font-weight: bold;
     }
 }*/
+
+.cardclass {
+    --min-height: 60px;
+    --background: var(--ion-item-background,var(--ion-background-color,#fff));
+    --background-activated: #171717fa;
+    --background-focused: var(--ion-item-background-activated,#f1f1f1);
+    --transition: background-color 300ms cubic-bezier(.4,0,.2,1);
+    --padding-start: 0px;
+    --color: var(--ion-item-color,var(--ion-text-color,#000));
+    --border-color: var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.13))));
+    --inner-padding-end: 16px;
+    --inner-border-width: 0 0 1px 0;
+    --highlight-height: 2px;
+    --highlight-color-focused: var(--ion-color-primary,#3880ff);
+    --highlight-color-valid: var(--ion-color-success,#10dc60);
+    --highlight-color-invalid: var(--ion-color-danger,#f04141);
+    font-size: 13px !important;
+    font-weight: 400;
+    text-transform: none;
+    max-width: 100%;
+}
+
+.cardtxt {
+    padding-left: 0.5em;
+    max-height: 4em;
+    max-width: 6em;
+    float: left;
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.cardcurname {
+    margin-left: 0em;
+    max-height: 3em;
+    max-width: 7em;
+    float: left;
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    text-align: left;
+    padding-right: 1em;
+}
+
+.cardtxtprice {
+    padding-left: 1em;
+    max-height: 3em;
+    max-width: 9em;
+    float: left;
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.cardhourly {
+    margin-left: 0em;
+    max-height: 3em;
+    max-width: 7em;  
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    text-align: right;
+    position:absolute;  
+    right:0;
+}
+
+.cardhourlypos {
+    margin-left: 0em;
+    max-height: 3em;
+    max-width: 7em;
+    float: right;
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    text-align: right;
+    padding-right: 1em;
+
+}
+
+ion-avatar  {
+    width:32px !important;
+    height : 32px !important;
+    }
