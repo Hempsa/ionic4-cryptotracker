@@ -10,16 +10,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { CoinmanagementPopoverComponent } from './coinmanagement-popover/coinmanagement-popover.component';
+import { PortfolioPopoverComponent } from './portfolio-popover/portfolio-popover.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, CoinmanagementPopoverComponent],
-  entryComponents: [CoinmanagementPopoverComponent],
+  declarations: [AppComponent, CoinmanagementPopoverComponent, PortfolioPopoverComponent],
+  entryComponents: [CoinmanagementPopoverComponent, PortfolioPopoverComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    FormsModule
   ],
   providers: [
     StatusBar,

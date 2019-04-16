@@ -129,3 +129,28 @@ ion-avatar {
     -webkit-background-clip: text;
     -webkit-text-fill-color: #35BD59;
 }
+
+/* Popovers */
+.popoverList {
+    padding: 0px;
+}
+
+.popoverAvatar {
+    margin-left: 8px;
+}
+
+.popoverHeader {
+    padding: 0px;
+    max-height: 4em;
+}
+
+.popoverTitle {
+    position: absolute;
+    left: 2.5em;
+    font-size: 18px;
+}
+
+.popoverSelectionLabel {
+    font-size: 16px;
+    padding-left: 0.5em
+}

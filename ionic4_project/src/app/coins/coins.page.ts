@@ -6,6 +6,7 @@ import { Global } from '../global';
 import { PopoverController } from '@ionic/angular';
 import { JsonPipe } from '@angular/common';
 import { CoinmanagementPopoverComponent } from '../coinmanagement-popover/coinmanagement-popover.component';
+import { PortfolioPopoverComponent } from '../portfolio-popover/portfolio-popover.component';
 
 @Component({
   selector: 'app-coins',

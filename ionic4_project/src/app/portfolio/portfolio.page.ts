@@ -51,6 +51,14 @@ export class PortfolioPage {
     });
   }
 
+  public getValue(): number {
+    var value = 0;
+    if (this.portfolio != null && this.portfolio.length > 0) {
+      this.portfolio.forEach(portfolioObj => value += (portfolioObj.amount * portfolioObj.price_usd));
+    }
+    return value;
+  }
+
   // Custom method because why not
   getReadableTime(timestamp: number): string {
     if (timestamp == null) {

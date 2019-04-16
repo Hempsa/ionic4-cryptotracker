@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { Coin } from '../coin';
 import { StorageService } from '../storage.service';
 import { PortfolioObject } from '../portfolio-object';
 import { PopoverController, NavParams } from '@ionic/angular';
+import { PortfolioPopoverComponent } from '../portfolio-popover/portfolio-popover.component';
 
 
 @Component({
   selector: 'app-coinmanagement-popover',
   templateUrl: './coinmanagement-popover.component.html',
-  styleUrls: ['./coinmanagement-popover.component.scss'],
+  styleUrls: ['./coinmanagement-popover.component.scss', '../common.scss'],
 })
 export class CoinmanagementPopoverComponent {
 
@@ -38,21 +38,20 @@ export class CoinmanagementPopoverComponent {
   }
 
   /**
-  * Inconvenient way to update values as the way this works is bad
-  */
-  /**
-   updateValues() {
-     if (this.coin != null) {
-       this.id = this.coin.id;
-       this.symbol = this.coin.symbol;
-       this.title = this.coin.name;
-     } else if (this.portfolioObject != null) {
-       this.id = this.portfolioObject.id;
-       this.symbol = this.portfolioObject.symbol;
-       this.title = this.portfolioObject.name;
-     }
-   }
+   * Shows popover menu for adding coin to portfolio
+   * @param coin Coin
    */
+  async showPortfolioPopover(object: PortfolioObject) {
+    this.dismiss();
+    const popoverElement = await this.popoverController.create({
+      component: PortfolioPopoverComponent,
+      componentProps: {
+        source: 'page.coins',
+        object: object
+      }
+    });
+    return await popoverElement.present();
+  }
 
   /**
    * Return whether favourite items should be included in popover menu
@@ -128,6 +127,9 @@ export class CoinmanagementPopoverComponent {
     portfolioObj.symbol = this.object.symbol;
     portfolioObj.timestamp = Date.now();
     portfolioObj.price_usd_when_added = this.object.price_usd;
+    this.showPortfolioPopover(portfolioObj);
+    return;
+
     this.portfolio.push(portfolioObj);
     this.storageService.put('portfolio', this.portfolio);
     this.dismiss();
@@ -150,6 +152,4 @@ export class CoinmanagementPopoverComponent {
   dismiss() {
     this.popoverController.dismiss();
   }
-
-
 }

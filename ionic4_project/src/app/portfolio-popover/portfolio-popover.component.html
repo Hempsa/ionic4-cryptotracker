@@ -1,0 +1,25 @@
+<ion-list class="popoverList">
+  <ion-list-header class="popoverHeader">
+    <ion-avatar item-start class="popoverAvatar">
+      <img src="/assets/img/{{object.symbol}}@2X.PNG" alt="{{object.id}}" style="border-radius:0;">
+    </ion-avatar>
+    <ion-label class="popoverTitle">{{object.name}}</ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime placeholder="Select date" [(ngModel)]="added"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Amount</ion-label>
+    <ion-input type="number" placeholder="Select amount" [(ngModel)]="object.amount"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Price</ion-label>
+    <ion-input type="number" placeholder="Select price" [(ngModel)]="object.price_usd_when_added"></ion-input>
+  </ion-item>
+  <ion-item color="success" (click)="addToPortfolio()">
+    <ion-icon name="add" color="dark"></ion-icon>
+    <ion-label color="dark" class="popoverSelectionLabel">Add to portfolio</ion-label>
+  </ion-item>
+</ion-list>
