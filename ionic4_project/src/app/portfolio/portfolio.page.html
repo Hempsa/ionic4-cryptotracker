@@ -1,8 +1,11 @@
 <ion-content color="dark">
     <ion-card color="dark">
-        <ion-card-header>
+        <ion-card-header *ngIf="portfolio.length > 0">
             Portfolio value {{getValueNow() | currency:'USD':'symbol-narrow':'1.2-3'}} of {{portfolio.length}} coins.
             ({{getPercentageChange()}})
+        </ion-card-header>
+        <ion-card-header *ngIf="portfolio.length == 0">
+            Your portfolio is empty. You can start adding coins from the coins page.
         </ion-card-header>
     </ion-card>
     <div *ngFor="let portfolioObject of portfolio">
