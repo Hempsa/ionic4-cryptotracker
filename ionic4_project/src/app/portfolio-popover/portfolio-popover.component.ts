@@ -10,7 +10,7 @@ import { validateConfig } from '@angular/router/src/config';
   styleUrls: ['./portfolio-popover.component.scss', '../common.scss'],
 })
 export class PortfolioPopoverComponent {
-  added: any;
+  added: any = null;
   object: PortfolioObject;
   portfolio: PortfolioObject[] = [];
 
@@ -38,7 +38,10 @@ export class PortfolioPopoverComponent {
   }
 
   getAddedTime(): number {
-    return Date.parse(this.added);
+    if (this.added != null) {
+      return Date.parse(this.added);
+    }
+    return null;
   }
 
 }
