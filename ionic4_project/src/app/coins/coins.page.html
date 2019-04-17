@@ -1,9 +1,10 @@
 <ion-content color="dark">
   <ion-card color="dark">
-    <ion-card-header>
-      Market share %
+    <ion-card-header (click)="toggleMarketSharePanelVisibility()">
+      <ion-label>Market share %</ion-label>
+      <ion-label class="marketshare-header-helptext" *ngIf="!isMarketSharePanelVisible()">(Click to show)</ion-label>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content [ngClass]="isMarketSharePanelVisible() ? '' : 'marketshare-hidden'">
       <canvas #doughnutCanvas></canvas>
       <p>Total market cap {{global?.total_market_cap_usd | currency:'USD':'symbol-narrow':'1.0-2'}}</p>
       <p>Bitcoin dominance {{global?.bitcoin_percentage_of_market_cap}}%</p>

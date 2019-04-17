@@ -16,6 +16,8 @@ import { PortfolioPopoverComponent } from '../portfolio-popover/portfolio-popove
 export class CoinsPage {
   @ViewChild('doughnutCanvas') doughnutCanvas;
 
+  marketSharePanelVisible: boolean = false; // Change to true to have marketshare section be visible by default
+
   global: Global;
   coins: Coin[] = []; /* declare coins as array */
 
@@ -99,4 +101,17 @@ export class CoinsPage {
       }
     });
   }
+
+  isMarketSharePanelVisible() {
+    return this.marketSharePanelVisible;
+  }
+
+  toggleMarketSharePanelVisibility() {
+    this.marketSharePanelVisible = !this.marketSharePanelVisible;
+  }
+
+  getClickToShowTextIfAny(): string {
+    return this.marketSharePanelVisible ? '' : '(Click to show)';
+  }
+
 }
