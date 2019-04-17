@@ -51,12 +51,30 @@ export class PortfolioPage {
     });
   }
 
-  public getValue(): number {
+  getValueNow(): number {
     var value = 0;
     if (this.portfolio != null && this.portfolio.length > 0) {
       this.portfolio.forEach(portfolioObj => value += (portfolioObj.amount * portfolioObj.price_usd));
     }
     return value;
+  }
+
+  getValueWhenAdded(): number {
+    var value = 0;
+    if (this.portfolio != null && this.portfolio.length > 0) {
+      this.portfolio.forEach(portfolioObj => value += (portfolioObj.amount * portfolioObj.price_usd_when_added));
+    }
+    return value;
+  }
+
+  getPercentageChange(): string {
+    if (this.portfolio != null && this.portfolio.length > 0) {
+      var portfolioValueWhenAdded = this.getValueWhenAdded();
+      var portfolioValueNow = this.getValueNow();
+      var change = (portfolioValueNow / portfolioValueWhenAdded) * 100;
+      return change.toFixed(2) + '%';
+    }
+    return '';
   }
 
   // Custom method because why not
