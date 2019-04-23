@@ -1,3 +1,6 @@
+<ion-toolbar color="dark">
+  <ion-searchbar [(ngModel)]="filterInput" (ionChange)="doFilter($event)"></ion-searchbar>
+</ion-toolbar>
 <ion-content color="dark">
   <ion-card color="dark">
     <ion-card-header (click)="toggleMarketSharePanelVisibility()">
@@ -12,7 +15,7 @@
     </ion-card-content>
   </ion-card>
 
-  <div *ngFor="let coin of coins">
+  <div *ngFor="let coin of visibleCoins">
     <!-- Repeat this element for each coin -->
     <ion-card (click)=showPopover(coin)>
       <ion-item color="dark" class="cardclass">

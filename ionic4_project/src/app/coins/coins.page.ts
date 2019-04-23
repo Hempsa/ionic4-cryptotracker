@@ -4,9 +4,7 @@ import { Chart } from 'chart.js'; // Import charts.js
 import { Coin } from '../coin';
 import { Global } from '../global';
 import { PopoverController } from '@ionic/angular';
-import { JsonPipe } from '@angular/common';
 import { CoinmanagementPopoverComponent } from '../coinmanagement-popover/coinmanagement-popover.component';
-import { PortfolioPopoverComponent } from '../portfolio-popover/portfolio-popover.component';
 
 @Component({
   selector: 'app-coins',
@@ -19,6 +17,7 @@ export class CoinsPage {
   marketSharePanelVisible: boolean = false; // Change to true to have marketshare section be visible by default
 
   global: Global;
+  visibleCoins: Coin[] = []; /* Coins that are visible after filtering */
   coins: Coin[] = []; /* declare coins as array */
 
   doughnutChart: any; /* declare doughnutChart */
@@ -26,10 +25,11 @@ export class CoinsPage {
   constructor(private apiService: ApiService, private popoverController: PopoverController) {
     this.apiService.getCoins().subscribe(data => {
       this.coins = data;
+      this.visibleCoins = data;
       this.apiService.getGlobal().subscribe(data => {
         this.global = data;
         this.drawChart();
-      });// Loading the Data
+      }); // Loading the Data
     });
 
   }
@@ -112,6 +112,20 @@ export class CoinsPage {
 
   getClickToShowTextIfAny(): string {
     return this.marketSharePanelVisible ? '' : '(Click to show)';
+  }
+
+  doFilter(event) {
+    var filterInput = event.detail.value.toLowerCase();
+    this.visibleCoins = [];
+    this.coins.forEach(coin => {
+      var name = coin.name.toLowerCase();
+      var symbol = coin.symbol.toLowerCase();
+      if (filterInput.length == 0
+        || name.indexOf(filterInput) >= 0
+        || symbol == filterInput) {
+        this.visibleCoins.push(coin);
+      }
+    });
   }
 
 }
