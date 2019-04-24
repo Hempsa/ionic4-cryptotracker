@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PortfolioObject } from '../portfolio-object';
-import { PopoverController, NavParams } from '@ionic/angular';
+import { PopoverController, NavParams, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { validateConfig } from '@angular/router/src/config';
 
@@ -14,7 +14,10 @@ export class PortfolioPopoverComponent {
   object: PortfolioObject;
   portfolio: PortfolioObject[] = [];
 
-  constructor(private navParams: NavParams, private popoverController: PopoverController, private storageService: StorageService) {
+  constructor(private navParams: NavParams,
+    private popoverController: PopoverController,
+    private storageService: StorageService,
+    private toastController: ToastController) {
     this.object = navParams.get('object');
     // Load portfolio
     this.storageService.get('portfolio').then(data => {
@@ -34,6 +37,9 @@ export class PortfolioPopoverComponent {
       this.portfolio.push(this.object);
       this.storageService.put('portfolio', this.portfolio);
       this.popoverController.dismiss();
+      this.displayToast('Added ' + this.object.name + ' to portfolio.', 2000);
+    } else {
+      this.displayToast('One or more values are invalid.', 2000);
     }
   }
 
@@ -42,6 +48,14 @@ export class PortfolioPopoverComponent {
       return Date.parse(this.added);
     }
     return null;
+  }
+
+  async displayToast(message: string, duration: number) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration
+    });
+    toast.present();
   }
 
 }

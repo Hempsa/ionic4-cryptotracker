@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { PortfolioObject } from '../portfolio-object';
-import { PopoverController, NavParams } from '@ionic/angular';
+import { PopoverController, NavParams, ToastController } from '@ionic/angular';
 import { PortfolioPopoverComponent } from '../portfolio-popover/portfolio-popover.component';
 
 
@@ -20,7 +20,10 @@ export class CoinmanagementPopoverComponent {
   favourites: string[] = [] /* declare favourites as array, only cached for convenience */
   portfolio: PortfolioObject[] = [];
 
-  constructor(private navParams: NavParams, private popoverController: PopoverController, private storageService: StorageService) {
+  constructor(private navParams: NavParams,
+    private popoverController: PopoverController,
+    private storageService: StorageService,
+    private toastController: ToastController) {
     this.source = navParams.get('source');
     this.object = navParams.get('object');
     // Load favorites
@@ -42,7 +45,7 @@ export class CoinmanagementPopoverComponent {
    * @param coin Coin
    */
   async showPortfolioPopover(object: PortfolioObject) {
-    this.dismiss();
+    this.popoverController.dismiss();
     const popoverElement = await this.popoverController.create({
       component: PortfolioPopoverComponent,
       componentProps: {
@@ -77,7 +80,8 @@ export class CoinmanagementPopoverComponent {
   addToFavourites() {
     this.favourites.push(this.object.id);
     this.storageService.put('favourites', this.favourites);
-    this.dismiss();
+    this.popoverController.dismiss();
+    this.displayToast('Added ' + this.object.name + ' to favourites.', 2000);
   }
 
   /**
@@ -91,7 +95,8 @@ export class CoinmanagementPopoverComponent {
       }
     });
     this.storageService.put('favourites', tmpArr);
-    this.dismiss();
+    this.popoverController.dismiss();
+    this.displayToast('Removed ' + this.object.name + ' from favourites.', 2000);
   }
 
   /**
@@ -129,10 +134,6 @@ export class CoinmanagementPopoverComponent {
     portfolioObj.price_usd_when_added = this.object.price_usd;
     this.showPortfolioPopover(portfolioObj);
     return;
-
-    this.portfolio.push(portfolioObj);
-    this.storageService.put('portfolio', this.portfolio);
-    this.dismiss();
   }
 
   /**
@@ -146,10 +147,15 @@ export class CoinmanagementPopoverComponent {
       }
     });
     this.storageService.put('portfolio', tmpArr);
-    this.dismiss();
+    this.popoverController.dismiss();
+    this.displayToast('Removed ' + this.object.name + ' from portfolio.', 2000);
   }
 
-  dismiss() {
-    this.popoverController.dismiss();
+  async displayToast(message: string, duration: number) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration
+    });
+    toast.present();
   }
 }
