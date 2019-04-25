@@ -67,20 +67,20 @@ export class CoinsPage {
         datasets: [{
           data: values,
           borderColor: [
-            'rgb(209, 0, 44)',
-            'rgb(0, 80, 209)',
-            'rgb(0, 209, 59)',
-            'rgb(0, 209, 174)',
-            'rgb(125, 0, 209)',
-            'rgb(209, 0, 174)'
+            '#FF6859',
+            '#72DEFF',
+            '#045D56',
+            '#1EB980',
+            '#B15DFF',
+            '#FFCF44'
           ],
           backgroundColor: [
-            'rgb(209, 0, 44)',
-            'rgb(0, 80, 209)',
-            'rgb(0, 209, 59)',
-            'rgb(0, 209, 174)',
-            'rgb(125, 0, 209)',
-            'rgb(209, 0, 174)'
+            '#FF6859',
+            '#72DEFF',
+            '#045D56',
+            '#1EB980',
+            '#B15DFF',
+            '#FFCF44'
           ],
           hoverBackgroundColor: [
             'rgba(209, 0, 44, 0.2)',
