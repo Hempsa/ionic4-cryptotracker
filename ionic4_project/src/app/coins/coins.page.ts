@@ -14,6 +14,7 @@ import { CoinmanagementPopoverComponent } from '../coinmanagement-popover/coinma
 export class CoinsPage {
   @ViewChild('doughnutCanvas') doughnutCanvas;
 
+  currentFilter: string = '';
   marketSharePanelVisible: boolean = false; // Change to true to have marketshare section be visible by default
 
   global: Global;
@@ -31,7 +32,18 @@ export class CoinsPage {
         this.drawChart();
       }); // Loading the Data
     });
+  }
 
+  doRefresh(event) {
+    this.apiService.getCoins().subscribe(data => {
+      this.coins = data;
+      this.updateVisibleCoins();
+      this.apiService.getGlobal().subscribe(data => {
+        this.global = data;
+        this.drawChart();
+        event.target.complete();
+      }); // Loading the Data
+    });
   }
 
   /**
@@ -115,14 +127,18 @@ export class CoinsPage {
   }
 
   doFilter(event) {
-    var filterInput = event.detail.value.toLowerCase();
+    this.currentFilter = event.detail.value.toLowerCase();
+    this.updateVisibleCoins();
+  }
+
+  updateVisibleCoins() {
     this.visibleCoins = [];
     this.coins.forEach(coin => {
       var name = coin.name.toLowerCase();
       var symbol = coin.symbol.toLowerCase();
-      if (filterInput.length == 0
-        || name.indexOf(filterInput) >= 0
-        || symbol == filterInput) {
+      if (this.currentFilter.length == 0
+        || name.indexOf(this.currentFilter) >= 0
+        || symbol == this.currentFilter) {
         this.visibleCoins.push(coin);
       }
     });

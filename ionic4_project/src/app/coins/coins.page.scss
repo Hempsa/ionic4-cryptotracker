@@ -1,5 +1,14 @@
+.marketshare-content {
+    height: auto;
+}
+
 .marketshare-hidden {
     display: none;
+}
+
+.marketshare-visible {
+    height: 100%;
+    max-height: 100%;
 }
 
 .marketshare-header-helptext {
