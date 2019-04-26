@@ -1,8 +1,15 @@
 <ion-content color="dark">
     <ion-card color="dark">
         <ion-card-header *ngIf="portfolio.length > 0">
-            Portfolio value {{getValueNow() | currency:'USD':'symbol-narrow':'1.2-3'}} of {{portfolio.length}} coins.
-            ({{getPercentageChange()}})
+            <div>
+                Portfolio value {{getValueNow() | currency:'USD':'symbol-narrow':'1.2-3'}} 
+            </div>
+            <div>
+                You have {{portfolio.length}} different currencies.
+            </div>
+            <div>
+                Portfolio performance ({{getPerformance()}})
+            </div>
         </ion-card-header>
         <ion-card-header *ngIf="portfolio.length == 0">
             Your portfolio is empty. You can start adding coins from the coins page.
@@ -16,20 +23,37 @@
                     <img src="/assets/img/{{portfolioObject.symbol}}@2X.PNG" alt="{{portfolioObject.id}}"
                         style="border-radius:0;">
                 </ion-avatar>
-                <p class="cardcurnameport">{{portfolioObject.name}}</p>
-                <p class="cardcurnameport">{{portfolioObject.symbol}}</p>
+                <div class="cardcoinnamewidth">
+                    <p class="cardcurnameportcoin">{{portfolioObject.name}}</p>
+                    <p class="cardcurnameportcoin">{{portfolioObject.symbol}}</p>
+                </div>
+                <div class="cardcoinnamewidth">
+                    <span ion-text item-start class="cardtxtportholdings">Holdings:
+                        {{(portfolioObject.price_usd * portfolioObject.amount)  | currency:'USD':'symbol-narrow':'1.2-2'}}
+                    </span>
+                </div>
+                <div class=cardcoinnamewidth>
+                    <span ion-text item-start class="cardcurnameportprofloss" color="subtle"
+                        [ngClass]="(((portfolioObject.price_usd * portfolioObject.amount)  - (portfolioObject.price_usd_when_added * portfolioObject.amount)) / (portfolioObject.price_usd_when_added * portfolioObject.amount) * 100 >= 0) ? 'positive' : 'negative'">
+                        Profit/Loss ({{((portfolioObject.price_usd * portfolioObject.amount) - (portfolioObject.price_usd_when_added * portfolioObject.amount)) / (portfolioObject.price_usd_when_added * portfolioObject.amount) * 100 | number : '1.2-2'}}%)
+                    </span>
+                </div>
             </ion-item>
             <ion-item color="dark" actions>
                 <span ion-text item-start class="cardtxtport">
-                    Added on: {{getReadableTime(portfolioObject.timestamp)}}
+                    Added on:
+                    {{getReadableTime(portfolioObject.timestamp)}}
                 </span>
-                <span ion-text item-start class="cardtxtport">Amount: {{portfolioObject.amount}}</span>
+                <span ion-text item-start class="cardtxtportamount">
+                    Added amount:
+                    {{portfolioObject.amount}}
+                </span>
+            </ion-item>
+            <ion-item color="dark">
                 <span ion-text item-start class="cardtxtport">Price when added:
-                    {{portfolioObject.price_usd_when_added | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
-                <span ion-text item-start class="cardtxtport">Price now:
+                    {{portfolioObject.price_usd_when_added | currency:'USD':'symbol-narrow':'1.2-6'}}</span>
+                <span ion-text item-start class="cardtxtport">Current price:
                     {{portfolioObject.price_usd | currency:'USD':'symbol-narrow':'1.2-3'}}</span>
-                <span ion-text item-start class="cardtxtport" color="subtle"
-                    [ngClass]="(portfolioObject.price_increase_percentage >= 0) ? 'positive' : 'negative'">({{portfolioObject.price_increase_percentage}}%)</span>
             </ion-item>
         </ion-card>
     </div>

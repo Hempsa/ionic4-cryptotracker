@@ -77,6 +77,16 @@ export class PortfolioPage {
     return '';
   }
 
+  getPerformance(): string {
+    if (this.portfolio != null && this.portfolio.length > 0) {
+      var portfolioValueWhenAdded = this.getValueWhenAdded();
+      var portfolioValueNow = this.getValueNow();
+      var change = (portfolioValueNow / portfolioValueWhenAdded) * 100 - 100;
+      return change.toFixed(2) + '%';
+    }
+    return '';
+  }
+
   // Custom method because why not
   getReadableTime(timestamp: number): string {
     if (timestamp == null) {
