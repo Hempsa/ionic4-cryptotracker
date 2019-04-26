@@ -1,8 +1,8 @@
 .cardtxtport {
     font-size: 13px !important;
-    padding-left: 0.5em;
+    padding-left: 1em;
     max-height: 4em;
-    max-width: 10em;
+    max-width: 9.5em;
     float: left;
     display: block;
     margin-block-start: 0px;
@@ -26,7 +26,7 @@
 
 .cardtxtportamount {
     font-size: 13px !important;
-    padding-left: 0.5em;
+    padding-left: 1em;
     max-height: 4em;
     max-width: 8em;
     float: left;
@@ -91,4 +91,9 @@
 
 .floatright {
     float: right;
+}
+
+.space {
+    padding-left: 1em;
+    padding-right: 1em;
 }
