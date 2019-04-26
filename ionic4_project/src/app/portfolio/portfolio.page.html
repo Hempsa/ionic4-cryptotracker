@@ -34,8 +34,8 @@
                 </div>
                 <div class=cardcoinnamewidth>
                     <span ion-text item-start class="cardcurnameportprofloss" color="subtle"
-                        [ngClass]="(((portfolioObject.price_usd * portfolioObject.amount)  - (portfolioObject.price_usd_when_added * portfolioObject.amount)) / (portfolioObject.price_usd_when_added * portfolioObject.amount) * 100 >= 0) ? 'positive' : 'negative'">
-                        Profit/Loss ({{((portfolioObject.price_usd * portfolioObject.amount) - (portfolioObject.price_usd_when_added * portfolioObject.amount)) / (portfolioObject.price_usd_when_added * portfolioObject.amount) * 100 | number : '1.2-2'}}%)
+                        [ngClass]="((portfolioObject.price_usd  - portfolioObject.price_usd_when_added) / (portfolioObject.price_usd_when_added) * 100 >= 0) ? 'positive' : 'negative'">
+                        Return % ({{(portfolioObject.price_usd - portfolioObject.price_usd_when_added) / (portfolioObject.price_usd_when_added) * 100 | number : '1.2-2'}}%)
                     </span>
                 </div>
             </ion-item>
