@@ -74,6 +74,7 @@ export class MarketsharePopoverComponent {
       },
       options: {
         legend: {
+          position: 'left',
           labels: {
             fontColor: 'white'
           }
