@@ -1,0 +1,8 @@
+<ion-content color="dark">
+  <ion-card-content>
+    <canvas #doughnutCanvas></canvas>
+    <p>Total market cap {{global?.total_market_cap_usd | currency:'USD':'symbol-narrow':'1.0-2'}}</p>
+    <p>Bitcoin dominance {{global?.bitcoin_percentage_of_market_cap}}%</p>
+    <!-- https://angular.io/guide/pipes -->
+  </ion-card-content>
+</ion-content>
