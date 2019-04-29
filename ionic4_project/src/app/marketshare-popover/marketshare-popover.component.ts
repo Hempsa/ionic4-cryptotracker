@@ -35,7 +35,7 @@ export class MarketsharePopoverComponent {
 
     for (let i = 0; i < this.coins.length; i++) {
       if (this.coins[i].rank < 7) {
-        labels.push(this.coins[i].name);
+        labels.push(this.coins[i].name + ' ' +(this.coins[i].market_cap_usd / this.global.total_market_cap_usd * 100).toFixed(2)+'%');
         var mshare = this.coins[i].market_cap_usd / this.global.total_market_cap_usd * 100;
         values.push(mshare.toFixed(2));
       }
