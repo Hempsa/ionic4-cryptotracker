@@ -84,6 +84,17 @@
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-
-
 }
+
+ion-popover{
+  ion-backdrop{
+    opacity: 0.5 !important;
+    }
+    .popover-wrapper{
+      .popover-content{
+      width:90%;
+      max-width:90%;
+      float: left;
+      }
+    }
+  }
