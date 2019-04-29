@@ -12,10 +12,11 @@ import { IonicStorageModule } from '@ionic/storage';
 import { CoinmanagementPopoverComponent } from './coinmanagement-popover/coinmanagement-popover.component';
 import { PortfolioPopoverComponent } from './portfolio-popover/portfolio-popover.component';
 import { FormsModule } from '@angular/forms';
+import { MarketsharePopoverComponent } from './marketshare-popover/marketshare-popover.component';
 
 @NgModule({
-  declarations: [AppComponent, CoinmanagementPopoverComponent, PortfolioPopoverComponent],
-  entryComponents: [CoinmanagementPopoverComponent, PortfolioPopoverComponent],
+  declarations: [AppComponent, CoinmanagementPopoverComponent, PortfolioPopoverComponent, MarketsharePopoverComponent],
+  entryComponents: [CoinmanagementPopoverComponent, PortfolioPopoverComponent, MarketsharePopoverComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

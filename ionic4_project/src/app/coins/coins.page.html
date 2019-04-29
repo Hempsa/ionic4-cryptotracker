@@ -8,16 +8,10 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-card color="dark">
-    <ion-card-header (click)="toggleMarketSharePanelVisibility()">
+    <ion-card-header color="success" (click)="showMarketsharePopover()">
       <ion-label>Market share %</ion-label>
-      <ion-label class="marketshare-header-helptext" *ngIf="!isMarketSharePanelVisible()">(Click to show)</ion-label>
+      <ion-label class="marketshare-header-helptext">(Click to show)</ion-label>
     </ion-card-header>
-    <ion-card-content [ngClass]="isMarketSharePanelVisible() ? 'marketshare-visible' : 'marketshare-hidden'">
-      <canvas #doughnutCanvas></canvas>
-      <p>Total market cap {{global?.total_market_cap_usd | currency:'USD':'symbol-narrow':'1.0-2'}}</p>
-      <p>Bitcoin dominance {{global?.bitcoin_percentage_of_market_cap}}%</p>
-      <!-- https://angular.io/guide/pipes -->
-    </ion-card-content>
   </ion-card>
   <div *ngFor="let coin of visibleCoins">
     <!-- Repeat this element for each coin -->

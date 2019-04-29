@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Chart } from 'chart.js'; // Import charts.js
 import { Coin } from '../coin';
-import { Global } from '../global';
 import { PopoverController } from '@ionic/angular';
 import { CoinmanagementPopoverComponent } from '../coinmanagement-popover/coinmanagement-popover.component';
+import { MarketsharePopoverComponent } from '../marketshare-popover/marketshare-popover.component';
 
 @Component({
   selector: 'app-coins',
@@ -15,22 +14,15 @@ export class CoinsPage {
   @ViewChild('doughnutCanvas') doughnutCanvas;
 
   currentFilter: string = '';
-  marketSharePanelVisible: boolean = false; // Change to true to have marketshare section be visible by default
+  //marketSharePanelVisible: boolean = false; // Change to true to have marketshare section be visible by default
 
-  global: Global;
   visibleCoins: Coin[] = []; /* Coins that are visible after filtering */
   coins: Coin[] = []; /* declare coins as array */
-
-  doughnutChart: any; /* declare doughnutChart */
 
   constructor(private apiService: ApiService, private popoverController: PopoverController) {
     this.apiService.getCoins().subscribe(data => {
       this.coins = data;
       this.visibleCoins = data;
-      this.apiService.getGlobal().subscribe(data => {
-        this.global = data;
-        this.drawChart();
-      }); // Loading the Data
     });
   }
 
@@ -38,11 +30,7 @@ export class CoinsPage {
     this.apiService.getCoins().subscribe(data => {
       this.coins = data;
       this.updateVisibleCoins();
-      this.apiService.getGlobal().subscribe(data => {
-        this.global = data;
-        this.drawChart();
-        event.target.complete();
-      }); // Loading the Data
+      event.target.complete();
     });
   }
 
@@ -61,69 +49,15 @@ export class CoinsPage {
     return await popoverElement.present();
   }
 
-  drawChart() {
-    let values = [];  //doughnutChart values
-    let labels = [];  //doughnutChart labels
-
-    for (let i = 0; i < this.coins.length; i++) {
-      if (this.coins[i].rank < 7) {
-        labels.push(this.coins[i].name);
-        var mshare = this.coins[i].market_cap_usd / this.global.total_market_cap_usd * 100;
-        values.push(mshare.toFixed(2));
-      }
-    }
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-      type: 'doughnut',
-      data: {
-        labels: labels,
-        datasets: [{
-          data: values,
-          borderColor: [
-            '#FF6859',
-            '#72DEFF',
-            '#045D56',
-            '#1EB980',
-            '#B15DFF',
-            '#FFCF44'
-          ],
-          backgroundColor: [
-            '#FF6859',
-            '#72DEFF',
-            '#045D56',
-            '#1EB980',
-            '#B15DFF',
-            '#FFCF44'
-          ],
-          hoverBackgroundColor: [
-            'rgba(209, 0, 44, 0.2)',
-            'rgba(0, 80, 209, 0.2)',
-            'rgba(0, 209, 59, 0.2)',
-            'rgba(0, 209, 174, 0.2)',
-            'rgba(125, 0, 209, 0.2)',
-            'rgba(209, 0, 174, 0.2)'
-          ]
-        }]
-      },
-      options: {
-        legend: {
-          labels: {
-            fontColor: 'white'
-          }
-        }
+  async showMarketsharePopover() {
+    const popoverElement = await this.popoverController.create({
+      component: MarketsharePopoverComponent,
+      componentProps: {
+        source: 'page.coins',
+        coins: this.coins
       }
     });
-  }
-
-  isMarketSharePanelVisible() {
-    return this.marketSharePanelVisible;
-  }
-
-  toggleMarketSharePanelVisibility() {
-    this.marketSharePanelVisible = !this.marketSharePanelVisible;
-  }
-
-  getClickToShowTextIfAny(): string {
-    return this.marketSharePanelVisible ? '' : '(Click to show)';
+    return await popoverElement.present();
   }
 
   doFilter(event) {
